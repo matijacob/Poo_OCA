@@ -1,16 +1,17 @@
 #include "casillalaberinto.h"
 #include "jugador.h"
 #include "juego.h"
-#include <QDebug>
 
 CasillaLaberinto::CasillaLaberinto(int posicion, int destino)
     : Casilla(posicion, "Laberinto"), destino(destino) {}
 
-void CasillaLaberinto::aplicarEfecto(Jugador& jugador, Juego& juego) {
-    qDebug() << jugador.getNombre()
-    << "ha caído en el Laberinto y retrocede a la casilla"
-    << destino;
-
+QString CasillaLaberinto::aplicarEfecto(Jugador& jugador, Juego& juego) {
     jugador.setPosicion(destino);
-    juego.getCasilla(destino)->aplicarEfecto(jugador, juego);
+    QString mensaje = QString("%1 ha caído en el Laberinto y retrocede a la casilla %2.")
+                          .arg(jugador.getNombre())
+                          .arg(destino);
+
+    mensaje += "\n" + juego.getCasilla(destino)->aplicarEfecto(jugador, juego);
+
+    return mensaje;
 }

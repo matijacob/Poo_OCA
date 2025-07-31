@@ -1,24 +1,23 @@
 #include "casillapozo.h"
 #include "jugador.h"
-#include <QDebug>
 
 CasillaPozo::CasillaPozo(int posicion)
     : Casilla(posicion, "Pozo"), hayJugadorAtrapado(false), jugadorAtrapado(nullptr) {}
 
-void CasillaPozo::aplicarEfecto(Jugador& jugador, Juego&) {
+QString CasillaPozo::aplicarEfecto(Jugador& jugador, Juego&) {
     if (!hayJugadorAtrapado) {
-        qDebug() << jugador.getNombre()
-        << "cayó en el Pozo y queda atrapado hasta que otro jugador caiga.";
         hayJugadorAtrapado = true;
         jugadorAtrapado = &jugador;
         jugador.setAtrapado(true);
+        return QString("%1 cayó en el Pozo y queda atrapado hasta que otro jugador caiga.")
+            .arg(jugador.getNombre());
     } else {
-        qDebug() << jugador.getNombre()
-        << "cayó en el Pozo y libera a"
-        << jugadorAtrapado->getNombre() << ".";
+        QString mensaje = QString("%1 cayó en el Pozo y libera a %2.")
+                              .arg(jugador.getNombre(), jugadorAtrapado->getNombre());
+
         jugadorAtrapado->setAtrapado(false);
-        hayJugadorAtrapado = true;
         jugadorAtrapado = &jugador;
         jugador.setAtrapado(true);
+        return mensaje;
     }
 }

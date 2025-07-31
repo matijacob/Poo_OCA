@@ -1,11 +1,9 @@
 #include "casillanormal.h"
 #include "jugador.h"
-#include <QDebug>
 
-CasillaNormal::CasillaNormal(int posicion, const QString &nombre)
-    : Casilla(posicion, nombre) {}
+CasillaNormal::CasillaNormal(int posicion)
+    : Casilla(posicion, "Normal") {}
 
-void CasillaNormal::aplicarEfecto(Jugador& jugador, Juego&) {
-    qDebug() << "El jugador" << jugador.getNombre()
-    << "cayó en una casilla normal.";
+QString CasillaNormal::aplicarEfecto(Jugador&, Juego&) {
+    return QString();
 }

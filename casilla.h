@@ -13,7 +13,7 @@ public:
     Casilla(int posicion, const QString &tipo);
     virtual ~Casilla() = default;
 
-    virtual void aplicarEfecto(Jugador &jugador, Juego &juego) = 0;
+    virtual QString aplicarEfecto(Jugador &jugador, Juego &juego) = 0;
 
     int getPosicion() const { return posicion; }
     QString getTipo() const { return tipo; }

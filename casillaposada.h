@@ -10,5 +10,5 @@ private:
 
 public:
     explicit CasillaPosada(int posicion);
-    void aplicarEfecto(Jugador& jugador, Juego& juego) override;
+    QString aplicarEfecto(Jugador& jugador, Juego& juego) override;
 };

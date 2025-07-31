@@ -1,12 +1,11 @@
 #include "casillaposada.h"
 #include "jugador.h"
-#include <QDebug>
 
 CasillaPosada::CasillaPosada(int posicion)
     : Casilla(posicion, "Posada"), turnosBloqueo(1) {}
 
-void CasillaPosada::aplicarEfecto(Jugador& jugador, Juego&) {
-    qDebug() << "El jugador" << jugador.getNombre()
-    << "se detiene en la Posada y pierde 1 turno.";
-    jugador.perderTurnos(1);
+QString CasillaPosada::aplicarEfecto(Jugador& jugador, Juego&) {
+    jugador.perderTurnos(turnosBloqueo);
+    return QString("El %1 se detiene en la Posada y pierde %2 turno(s).")
+        .arg(jugador.getNombre(), QString::number(turnosBloqueo));
 }

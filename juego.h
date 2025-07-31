@@ -10,7 +10,8 @@ private:
     int turnoActual;
     bool terminado;
     bool turnoExtra;
-
+    int ultimoDado = 0;
+    QString ultimoMensaje;
 public:
     explicit Juego(int cantidadJugadores);
 
@@ -21,6 +22,7 @@ public:
 
     std::vector<Jugador>& getJugadores();
     int getTurnoActual() const;
-
+    int getUltimoDado() const { return ultimoDado; }
     Casilla* getCasilla(int indice) const;
+    QString getUltimoMensaje() const { return ultimoMensaje; }
 };

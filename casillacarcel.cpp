@@ -1,12 +1,11 @@
 #include "casillacarcel.h"
 #include "jugador.h"
-#include <QDebug>
 
 CasillaCarcel::CasillaCarcel(int pos)
     : Casilla(pos, "Cárcel"), turnosCastigo(3) {}
 
-void CasillaCarcel::aplicarEfecto(Jugador& jugador, Juego&) {
-    qDebug() << jugador.getNombre()
-    << "fue a la Cárcel. Pierde" << turnosCastigo << "turnos.";
+QString CasillaCarcel::aplicarEfecto(Jugador& jugador, Juego&) {
     jugador.perderTurnos(turnosCastigo);
+    return QString("%1 fue a la Cárcel. Pierde %2 turnos.")
+        .arg(jugador.getNombre(), QString::number(turnosCastigo));
 }

@@ -1,12 +1,11 @@
 #include "casillacalavera.h"
 #include "jugador.h"
-#include <QDebug>
 
 CasillaCalavera::CasillaCalavera(int pos)
     : Casilla(pos, "Calavera") {}
 
-void CasillaCalavera::aplicarEfecto(Jugador& jugador, Juego&) {
-    qDebug() << jugador.getNombre()
-    << "cayó en la Calavera. Vuelve a la casilla 1.";
+QString CasillaCalavera::aplicarEfecto(Jugador& jugador, Juego&) {
     jugador.setPosicion(1);
+    return QString("%1 cayó en la Calavera. Vuelve a la casilla 1.")
+        .arg(jugador.getNombre());
 }

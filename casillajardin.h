@@ -7,5 +7,5 @@ class Juego;
 class CasillaJardin : public Casilla {
 public:
     explicit CasillaJardin(int posicionMeta);
-    void aplicarEfecto(Jugador& jugador, Juego& juego) override;
+    QString aplicarEfecto(Jugador& jugador, Juego& juego) override;
 };

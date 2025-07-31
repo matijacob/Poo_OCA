@@ -12,7 +12,7 @@
 Tablero::Tablero() {
 
     for (int i = 0; i <= 63; ++i) {
-        casillas.push_back(new CasillaNormal(i, "Casilla Normal"));
+        casillas.push_back(new CasillaNormal(i));
     }
 
 

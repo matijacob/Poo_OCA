@@ -12,7 +12,7 @@ private:
 public:
     explicit CasillaPozo(int posicion);
 
-    void aplicarEfecto(Jugador& jugador, Juego& juego) override;
+    QString aplicarEfecto(Jugador& jugador, Juego& juego) override;
 
     bool estaJugadorAtrapado() const { return hayJugadorAtrapado; }
     Jugador* obtenerJugadorAtrapado() const { return jugadorAtrapado; }

@@ -1,13 +1,12 @@
 #include "casillapuente.h"
 #include "jugador.h"
-#include <QDebug>
 
 CasillaPuente::CasillaPuente(int pos, int destino)
     : Casilla(pos, "Puente"), destino(destino) {}
 
-void CasillaPuente::aplicarEfecto(Jugador &jugador, Juego&) {
-    qDebug() << "Jugador" << jugador.getNombre()
-    << "cruzó el PUENTE y va a la casilla"
-    << destino << "!";
+QString CasillaPuente::aplicarEfecto(Jugador &jugador, Juego&) {
     jugador.setPosicion(destino);
+    return QString(" %1 cruzó el PUENTE y va a la casilla %2!")
+        .arg(jugador.getNombre())
+        .arg(destino);
 }

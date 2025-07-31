@@ -23,7 +23,7 @@ int Juego::getTurnoActual() const {
 }
 
 void Juego::otorgarTurnoExtra(Jugador& jugador) {
-    qDebug() << "El jugador" << jugador.getNombre()
+    qDebug() << "El " << jugador.getNombre()
     << "tiene un turno extra por caer en una Oca.";
     turnoExtra = true;
 }
@@ -31,15 +31,16 @@ void Juego::otorgarTurnoExtra(Jugador& jugador) {
 void Juego::jugarTurno() {
     if (terminado) return;
 
-    Jugador& jugador = jugadores[turnoActual];
-    qDebug() << "Turno de" << jugador.getNombre();
+    Jugador &jugador = jugadores[turnoActual];
+    ultimoMensaje.clear();
 
     if (!jugador.puedeJugar()) {
-        qDebug() << jugador.getNombre() << "pierde este turno.";
         jugador.reducirTurno();
+        ultimoMensaje = QString("Jugador %1 pierde este turno.")
+                            .arg(turnoActual + 1);
     } else {
         int dado = rand() % 6 + 1;
-        qDebug() << "Dado:" << dado;
+        ultimoDado = dado;
 
         int nuevaPos = jugador.getPosicion() + dado;
         if (nuevaPos > 63) {
@@ -50,12 +51,24 @@ void Juego::jugarTurno() {
         jugador.setPosicion(nuevaPos);
 
 
-        Casilla* casilla = tablero.getCasilla(nuevaPos);
-        if (casilla) casilla->aplicarEfecto(jugador, *this);
+        ultimoMensaje = QString("Jugador %1 sacó %2 y cayó en la casilla %3")
+                            .arg(turnoActual + 1)
+                            .arg(dado)
+                            .arg(jugador.getPosicion());
+
+
+        Casilla *casilla = tablero.getCasilla(nuevaPos);
+        if (casilla) {
+            QString efecto = casilla->aplicarEfecto(jugador, *this);
+            if (!efecto.isEmpty()) {
+                ultimoMensaje += "\n" + efecto;
+            }
+        }
+
 
         if (jugador.getPosicion() == 63) {
-            qDebug() << jugador.getNombre() << "ha ganado el juego!";
             terminado = true;
+            ultimoMensaje += "\n¡Jugador " + QString::number(turnoActual + 1) + " ha ganado el juego!";
             return;
         }
     }

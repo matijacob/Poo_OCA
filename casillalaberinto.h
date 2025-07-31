@@ -11,5 +11,5 @@ private:
 public:
     explicit CasillaLaberinto(int posicion, int destino);
 
-    void aplicarEfecto(Jugador& jugador, Juego& juego) override;
+    QString aplicarEfecto(Jugador& jugador, Juego& juego) override;
 };
